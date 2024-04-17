@@ -1,1 +1,26 @@
+(var slider-value 1)
+(function update-value new_value 
+    (var slider-value (* new_value 2))
+    (patch-widget-by-id "display" { :text (str "timescale: " slider-value) })
+    (patch-widget-by-id "slider" { :value new_value })
+)
 
+(var widget {
+    :type "floating_widget"
+    :title "heartbeat test"
+    :size [160 128]
+    :members [
+        {
+            :type "slider"
+            :id "slider"
+            :value slider-value
+            :changed update-value
+        }
+        {
+            :type "text"
+            :id "display"
+        }
+    ]
+})
+
+(create-widget widget)
